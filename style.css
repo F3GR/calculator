@@ -1,0 +1,55 @@
+html {
+    border: none;
+}
+
+body {
+    background: radial-gradient(ellipse at top, #dd9f9f, transparent), 
+                radial-gradient(ellipse at bottom, #b8ef8a, transparent);
+    background-repeat: no-repeat;
+    border: none;
+}
+
+* {
+    border: 1px solid red;
+}
+
+.device {
+    background-color: rgb(38, 38, 38);
+    margin: auto;
+    margin-top: 50px;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px;
+    gap: 30px;
+}
+
+.row > * {
+    flex: 1;
+    max-width: 74px;
+    margin: 0 30px 30px 30px;
+}
+
+.menu {
+    flex: 1;
+    max-height: 80px;
+}
+
+.AC,
+.DEL {
+    flex: 0 1 120px;
+    max-width: 120px;
+}
+
+.zero {
+    flex: 0 1 174px;
+    max-width: 174px;
+}
