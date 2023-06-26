@@ -9,10 +9,6 @@ body {
     border: none;
 }
 
-* {
-    border: 1px solid red;
-}
-
 .device {
     background-color: rgb(38, 38, 38);
     margin: auto;
@@ -21,35 +17,39 @@ body {
     height: 500px;
     display: flex;
     flex-direction: column;
+    padding: 30px 20px;
+}
+
+.menu {
+    flex: 0 0 80px;
+    padding-top: 10px;
+    max-height: 80px;
+    padding-bottom: 10px;
 }
 
 .row {
     flex: 1;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    padding: 30px;
-    gap: 30px;
+    justify-content: space-between;
+    padding: 10px 0px;
+    width: 360px;
 }
 
 .row > * {
     flex: 1;
     max-width: 74px;
-    margin: 0 30px 30px 30px;
-}
-
-.menu {
-    flex: 1;
-    max-height: 80px;
+    border: 1px solid white;
+    border-collapse: collapse;
 }
 
 .AC,
 .DEL {
-    flex: 0 1 120px;
+    flex: 1 1 120px;
     max-width: 120px;
 }
 
 .zero {
-    flex: 0 1 174px;
+    flex: 1 1 174px;
     max-width: 174px;
 }
