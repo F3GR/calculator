@@ -1,11 +1,9 @@
-const validKeyStrokes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '.', '+', '-', ,'*', '/', 'Enter'];
-
 const selectedButtons = document.querySelectorAll('button');
 const selectedCurrentInput = document.querySelector('.current-input');
 
-let selectedButtonKeys = [];
+let validButtonKeys = [];
 selectedButtons.forEach((button) => {
-    selectedButtonKeys.push(button.getAttribute('data-key'));
+    validButtonKeys.push(button.getAttribute('data-key'));
 });
 
 let currentInput = "";
@@ -20,7 +18,7 @@ selectedButtons.forEach((button) => {
         selectedCurrentInput.innerText = currentInput;
         button.classList.remove('scale-down');
         button.classList.add('scale-up');
-        }, 100)
+        }, 50)
     });
     button.addEventListener('mouseover', function() {
         button.classList.add('scale-up');
@@ -30,18 +28,22 @@ selectedButtons.forEach((button) => {
     });
 });
 
-selectedCurrentInput.addEventListener('keydown', function(e) {
-        if (validKeyStrokes.includes(e.key)) {
+// Keystrokes
+window.addEventListener('keydown', function(e) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    if (validButtonKeys.includes(e.key)) {
+    const button = [...selectedButtons].find((button) => button.getAttribute('data-key') === e.key);
 
-        button.classList.add('scale-down');
-        button.classList.remove('scale-up');
-    
-        setTimeout(function(e) {       
-        currentText += e.key;
-        selectedCurrentInput.innerText = currentText;
-        button.classList.remove('scale-down');
-        button.classList.add('scale-up');
-        }, 100);
+    button.classList.add('scale-down');
+    button.classList.remove('scale-up');
+
+    setTimeout(function() {       
+    currentInput += e.key;
+    selectedCurrentInput.innerText = currentInput;
+    button.classList.remove('scale-down');
+    button.classList.add('scale-up');
+    }, 50);
     }
 });
 
