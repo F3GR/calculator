@@ -10,7 +10,7 @@ body {
 }
 
 .device {
-    background-color: rgb(38, 38, 38);
+    background-color: rgb(30, 30, 30);
     margin: auto;
     margin-top: 50px;
     width: 400px;
@@ -18,7 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .menu {
@@ -34,6 +34,24 @@ body {
     border: 1px solid white;
     flex: 1;
     background-color: black;
+    color: whitesmoke;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.user-input {
+    text-align: right;
+}
+
+.user-input::-webkit-outer-spin-button,
+.user-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.user-input {
+    -moz-appearance: textfield;
 }
 
 .row {
@@ -49,21 +67,28 @@ body {
     padding-bottom: 0px;
 }
 
-.row > * {
+.row > button {
     flex: 1;
     max-width: 74px;
     border: 1px solid white;
     border-collapse: collapse;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    border-radius: 10px;
 }
 
-.AC,
-.DEL {
+button.AC,
+button.DEL {
     flex: 1 1 120px;
     max-width: 120px;
 }
 
-.zero {
+button.zero {
     flex: 1 1 174px;
     max-width: 174px;
 }
