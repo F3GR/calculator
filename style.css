@@ -14,7 +14,8 @@ body {
     margin: auto;
     margin-top: 40px;
     width: 400px;
-    height: 520px;
+    min-height: 520px;
+    max-height: 600px;
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
@@ -27,6 +28,7 @@ body {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .menu > * {
@@ -41,12 +43,15 @@ body {
 }
 
 .result {
+    max-width: 360px;
+    max-height: 40px;
     border-bottom: none;
     border-radius: 5px 5px 0 0;
-    padding: 0px 5px;
+    padding: 5px 5px;
     display: flex;
-    align-items: center;
     letter-spacing: 1px;
+    flex-wrap: wrap;
+    word-break: break-all;
 }
 
 .current-input {
@@ -55,6 +60,7 @@ body {
     text-align: right;
     font-size: 1.5rem;
     letter-spacing: 2px;
+    resize: none;
 }
 
 .current-input::-webkit-outer-spin-button,
@@ -98,6 +104,10 @@ body {
     border-radius: 10px;
 }
 
+button {
+    transition: transform 0.1s ease-in-out;
+}
+
 button.AC,
 button.DEL {
     flex: 1 1 120px;
@@ -107,4 +117,12 @@ button.DEL {
 button.zero {
     flex: 1 1 174px;
     max-width: 174px;
+}
+
+button.scale-up {
+    transform: scale(1.05);
+}
+
+.scale-down {
+    transform: scale(0.95);
 }
