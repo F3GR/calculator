@@ -110,6 +110,7 @@ button {
 
 button.AC,
 button.DEL {
+    background-color: #970000;
     flex: 1 1 120px;
     max-width: 120px;
 }
@@ -117,6 +118,7 @@ button.DEL {
 button.calculate {
     flex: 1 1 174px;
     max-width: 174px;
+    background-color: rgb(91, 91, 91);
 }
 
 button.scale-up {

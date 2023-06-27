@@ -24,6 +24,9 @@ function Calculator() {
                 const trimmed = rounded.replace(/\.?0+$/, '');
                 return Number(trimmed);
             default:
+                if (firstArg == 0) {
+                    return Number(secondArg);
+                }
                 return Number(firstArg);
         }
     }
@@ -57,13 +60,12 @@ selectedButtons.forEach((button) => {
 });
 
 window.addEventListener('keydown', function(e) {
-    e.stopImmediatePropagation();
+    e.stopPropagation();
     e.preventDefault();
     if (validButtonKeys.includes(e.key)) {
         const button = document.querySelector(`button[data-key="${e.key}"]`);
         const pressedRemoveButton = (e.key === 'Backspace' && e.shiftKey);
         const removeButton = document.querySelector(`button[data-key="BackspaceShift"]`);
-
         if (pressedRemoveButton) {
             removeButton.classList.add('scale-down');
             removeButton.classList.remove('scale-up');
@@ -73,6 +75,7 @@ window.addEventListener('keydown', function(e) {
                 removeButton.classList.remove('scale-down');
                 removeButton.classList.add('scale-up');
             }, 50);
+            removeButton.classList.remove('scale-up');
       } else {
             button.classList.add('scale-down');
             button.classList.remove('scale-up');
@@ -82,6 +85,7 @@ window.addEventListener('keydown', function(e) {
                 button.classList.remove('scale-down');
                 button.classList.add('scale-up');
             }, 50);
+            removeButton.classList.remove('scale-up');
         }
     }
 });
@@ -92,34 +96,33 @@ function applyKeystroke(key) {
             selectedResult.textContent = "";
             currentInput = "";
             return currentInput;
-
         case (key === 'Backspace'):
             if (currentInput === 'Infinity' || currentInput === 'NaN') {
                 currentInput = "";
                 return currentInput;
             }
             return currentInput.slice(0, -1);
-
-        case (key === '=' || key === 'Enter'):
-            let currResult = calculator.calculate(result.slice(-1), Number(result.slice(0, -1)), Number(currentInput));
-            selectedResult.textContent = "";
-            result = "";
-            currResult = currResult.toString();
-            return currResult;
-
+        case ((key === '=' || key === 'Enter')):
+            if (currentInput !== "" && currentInput !== ".") {
+                let currResult = calculator.calculate(result.slice(-1), Number(result.slice(0, -1)), Number(currentInput));
+                selectedResult.textContent = "";
+                result = "";
+                currResult = currResult.toString();
+                return currResult;
+            }
         case (key === '+' || key === '-'|| key === '/' || key === '*'):
-            if (result.slice(-1) === '+' || result.slice(-1) === '-' ||
-            result.slice(-1) === '*' || result.slice(-1) === '/') {
+            if (result.slice(-1) === '+' || result.slice(-1) === '-' || result.slice(-1) === '*' || result.slice(-1) === '/') {
                 return currentInput;
             }
             result = currentInput + key;
             selectedResult.textContent = currentInput + key;
             currentInput = "";
             return currentInput;
-
         default:
             if (currentInput === '0' && key !== '.') {
                 currentInput = key;
+            } else if (currentInput.includes('.') && key === '.') {
+                return currentInput;
             } else {
                 currentInput += key;
             }
