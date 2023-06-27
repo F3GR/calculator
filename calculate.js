@@ -114,11 +114,9 @@ function applyKeystroke(key) {
             if (currentInput === "" || currentInput.slice(-1) === '.') {
                 return currentInput;
             }
-            if (result.slice(-1) === '+' || result.slice(-1) === '-' || result.slice(-1) === '*' || result.slice(-1) === '/') {
-                return currentInput;
-            }
-            result = currentInput + key;
-            selectedResult.textContent = currentInput + key;
+            let currResult = calculator.calculate(result.slice(-1), Number(result.slice(0, -1)), Number(currentInput));
+            result = currResult + key;
+            selectedResult.textContent = result;
             currentInput = "";
             return currentInput;
         default:
