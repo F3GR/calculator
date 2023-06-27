@@ -3,18 +3,19 @@ const selectedCurrentInput = document.querySelector('.current-input');
 
 let validButtonKeys = [];
 selectedButtons.forEach((button) => {
-    validButtonKeys.push(button.getAttribute('data-key'));
+    const dataKeys = button.getAttribute('data-key').split(' ');
+    validButtonKeys.push(...dataKeys);
 });
 
 let currentInput = "";
 
-// Click events
+
 selectedButtons.forEach((button) => {
     button.addEventListener('click', function() {
         button.classList.add('scale-down');
         button.classList.remove('scale-up');
-        setTimeout(function() {       
-        currentInput += button.innerText;
+        setTimeout(function() {      
+        currentInput = applyKeystroke(button.getAttribute('data-key'));
         selectedCurrentInput.innerText = currentInput;
         button.classList.remove('scale-down');
         button.classList.add('scale-up');
@@ -28,24 +29,59 @@ selectedButtons.forEach((button) => {
     });
 });
 
-// Keystrokes
+
 window.addEventListener('keydown', function(e) {
-    e.stopImmediatePropagation();
-    e.preventDefault();
     if (validButtonKeys.includes(e.key)) {
-    const button = [...selectedButtons].find((button) => button.getAttribute('data-key') === e.key);
+        const button = document.querySelector(`button[data-key="${e.key}"]`);
+        const pressedRemoveButton = (e.key === 'Backspace' && e.shiftKey);
+        const removeButton = document.querySelector(`button[data-key="BackspaceShift"]`);
 
-    button.classList.add('scale-down');
-    button.classList.remove('scale-up');
-
-    setTimeout(function() {       
-    currentInput += e.key;
-    selectedCurrentInput.innerText = currentInput;
-    button.classList.remove('scale-down');
-    button.classList.add('scale-up');
-    }, 50);
+        if (pressedRemoveButton) {
+            removeButton.classList.add('scale-down');
+            removeButton.classList.remove('scale-up');
+            setTimeout(function() {
+                currentInput = applyKeystroke('BackspaceShift');
+                selectedCurrentInput.innerText = currentInput;
+                removeButton.classList.remove('scale-down');
+                removeButton.classList.add('scale-up');
+            }, 50);
+      } else {
+            button.classList.add('scale-down');
+            button.classList.remove('scale-up');
+            setTimeout(function() {
+                currentInput = applyKeystroke(e.key);
+                selectedCurrentInput.innerText = currentInput;
+                button.classList.remove('scale-down');
+                button.classList.add('scale-up');
+            }, 50);
+        }
     }
 });
+
+function applyKeystroke(key) {
+    switch (key) {
+        case 'BackspaceShift':
+            currentInput = "";
+            return currentInput;
+        case 'Backspace':
+            return currentInput.slice(0, -1);
+        case ('Enter'):
+            currentInput = "";
+            return currentInput;
+        case ('='):
+            currentInput = "";
+            return currentInput;
+        default:
+            currentInput += key;
+            return currentInput;
+    }
+}
+
+
+
+
+
+
 
 
   
