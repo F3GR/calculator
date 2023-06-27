@@ -97,7 +97,7 @@ function applyKeystroke(key) {
             currentInput = "";
             return currentInput;
         case (key === 'Backspace'):
-            if (currentInput === 'Infinity' || currentInput === 'NaN') {
+            if (currentInput === 'Infinity' || currentInput === 'NaN' || currentInput === 'undefined') {
                 currentInput = "";
                 return currentInput;
             }
@@ -111,6 +111,9 @@ function applyKeystroke(key) {
                 return currResult;
             }
         case (key === '+' || key === '-'|| key === '/' || key === '*'):
+            if (currentInput === "" || currentInput.slice(-1) === '.') {
+                return currentInput;
+            }
             if (result.slice(-1) === '+' || result.slice(-1) === '-' || result.slice(-1) === '*' || result.slice(-1) === '/') {
                 return currentInput;
             }
@@ -119,6 +122,9 @@ function applyKeystroke(key) {
             currentInput = "";
             return currentInput;
         default:
+            if (currentInput === "" && key === '.') {
+                return currentInput;
+            }
             if (currentInput === '0' && key !== '.') {
                 currentInput = key;
             } else if (currentInput.includes('.') && key === '.') {
