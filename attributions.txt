@@ -7,6 +7,6 @@ The project was created using applications:
 
 The project was created using external media files:
     1. ./calculator.svg:
-"Calculator" by sunda3d; 
+"Calculator" by sunda3d, profile - https://openclipart.org/artist/sunda3d
 source file - https://openclipart.org/detail/338189/calculator
 license - https://creativecommons.org/publicdomain/zero/1.0/

@@ -20,7 +20,10 @@ function Calculator() {
                     return result;
                 }
             case '/':
-                const rounded = (firstArg / secondArg).toFixed(10);
+                if (firstArg === 0 && secondArg === 0) {
+                    return 'undefined';
+                }
+                const rounded = (firstArg / secondArg).toFixed(15);
                 const trimmed = rounded.replace(/\.?0+$/, '');
                 return Number(trimmed);
             default:
