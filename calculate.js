@@ -100,20 +100,27 @@ function applyKeystroke(key) {
             currentInput = "";
             return currentInput;
         case (key === 'Backspace'):
-            if (currentInput === 'Infinity' || currentInput === 'NaN' || currentInput === 'undefined') {
+            if (!valid(currentInput) || !valid(result)) {
                 currentInput = "";
                 return currentInput;
             }
             return currentInput.slice(0, -1);
         case ((key === '=' || key === 'Enter')):
-            if (currentInput !== "" && currentInput !== ".") {
+            if (!valid(currentInput) || !valid(result)) {
+                return currentInput;
+            }
+            if (currentInput !== "" && currentInput !== "." && currentInput.slice(-1) !== ".") {
                 let currResult = calculator.calculate(result.slice(-1), Number(result.slice(0, -1)), Number(currentInput));
                 selectedResult.textContent = "";
                 result = "";
                 currResult = currResult.toString();
                 return currResult;
             }
+            return currentInput;
         case (key === '+' || key === '-'|| key === '/' || key === '*'):
+            if (!valid(currentInput) || !valid(result)) {
+                return currentInput;
+            }
             if (currentInput === "" || currentInput.slice(-1) === '.') {
                 return currentInput;
             }
@@ -123,6 +130,9 @@ function applyKeystroke(key) {
             currentInput = "";
             return currentInput;
         default:
+            if (!valid(currentInput) || !valid(result)) {
+                return currentInput;
+            }
             if (currentInput === "" && key === '.') {
                 return currentInput;
             }
@@ -137,7 +147,9 @@ function applyKeystroke(key) {
     }
 }
 
-
+function valid(input) {
+    return (input !== 'Infinity' && input !== 'NaN' && input !== 'undefined');
+}
 
 
 
